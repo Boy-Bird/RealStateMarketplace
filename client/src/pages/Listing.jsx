@@ -14,6 +14,7 @@ import {
   FaParking,
   FaShare,
 } from "react-icons/fa";
+import Contact from "../components/Contact";
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -21,6 +22,7 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [contact, setContact] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
@@ -140,6 +142,7 @@ export default function Listing() {
                 Contact landlord
               </button>
             )}
+            {contact && <Contact listing={listing}/>}
           </div>
         </div>
       )}
