@@ -7,7 +7,7 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -146,7 +146,7 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`)
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -268,7 +268,7 @@ export default function CreateListing() {
               />
               <p>Baths</p>
             </div>
-            <div className="flex item-center gap-2">
+            <div className="flex items-center gap-2">
               <input
                 type="number"
                 id="regularPrice"
@@ -279,13 +279,15 @@ export default function CreateListing() {
                 onChange={handleChange}
                 value={formData.regularPrice}
               />
-              <div className="flex flex-col item-center">
+              <div className="flex flex-col items-center">
                 <p>Regular price</p>
-                <span className="text-xs">($ / months)</span>
+                {formData.type === "rent" && (
+                  <span className="text-xs">($ / months)</span>
+                )}
               </div>
             </div>
             {formData.offer && (
-              <div className="flex item-center gap-2">
+              <div className="flex items-center gap-2">
                 <input
                   type="number"
                   id="discountPrice"
@@ -296,9 +298,11 @@ export default function CreateListing() {
                   onChange={handleChange}
                   value={formData.discountPrice}
                 />
-                <div className="flex flex-col item-center">
+                <div className="flex flex-col items-center">
                   <p>Discounted Price</p>
-                  <span className="text-xs">($ / months)</span>
+                  {formData.type === "rent" && (
+                    <span className="text-xs">($ / months)</span>
+                  )}
                 </div>
               </div>
             )}
